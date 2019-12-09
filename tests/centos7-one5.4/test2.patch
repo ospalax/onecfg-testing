@@ -1,0 +1,179 @@
+diff -Naur --color one-conf-distribution/defaultrc one-conf/defaultrc
+--- one-conf-distribution/defaultrc	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/defaultrc	2019-12-09 08:21:38.513551581 +0100
+@@ -35,5 +35,5 @@
+ ONE_MAD_DEBUG=
+ 
+ # Nice Priority to run the drivers
+-PRIORITY=19
++PRIORITY=15
+ 
+diff -Naur --color one-conf-distribution/oned.conf one-conf/oned.conf
+--- one-conf-distribution/oned.conf	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/oned.conf	2019-12-09 08:21:04.949203637 +0100
+@@ -63,8 +63,8 @@
+ 
+ #MANAGER_TIMER = 15
+ 
+-MONITORING_INTERVAL = 60
+-MONITORING_THREADS  = 50
++MONITORING_INTERVAL = 120
++MONITORING_THREADS  = 100
+ 
+ #HOST_PER_INTERVAL               = 15
+ #HOST_MONITORING_EXPIRATION_TIME = 43200
+@@ -75,9 +75,9 @@
+ 
+ SCRIPTS_REMOTE_DIR=/var/tmp/one
+ 
+-PORT = 2633
++PORT = 2666
+ 
+-LISTEN_ADDRESS = "0.0.0.0"
++LISTEN_ADDRESS = "127.0.0.1"
+ 
+ DB = [ BACKEND = "sqlite" ]
+ 
+@@ -263,7 +263,7 @@
+ 
+ NETWORK_SIZE = 254
+ 
+-MAC_PREFIX   = "02:00"
++MAC_PREFIX   = "02:22"
+ 
+ VLAN_IDS = [
+     START    = "2",
+@@ -314,7 +314,7 @@
+ 
+ DATASTORE_CAPACITY_CHECK = "yes"
+ 
+-DEFAULT_DEVICE_PREFIX       = "hd"
++DEFAULT_DEVICE_PREFIX       = "sd"
+ DEFAULT_CDROM_DEVICE_PREFIX = "hd"
+ 
+ DEFAULT_IMAGE_TYPE           = "OS"
+@@ -390,11 +390,11 @@
+ #    -t number of threads, i.e. number of hosts monitored at the same time
+ #    -w Timeout in seconds to execute external commands (default unlimited)
+ #-------------------------------------------------------------------------------
+-IM_MAD = [
+-      NAME          = "vcenter",
+-      SUNSTONE_NAME = "VMWare vCenter",
+-      EXECUTABLE    = "one_im_sh",
+-      ARGUMENTS     = "-c -t 15 -r 0 vcenter" ]
++#IM_MAD = [
++#      NAME          = "vcenter",
++#      SUNSTONE_NAME = "VMWare vCenter",
++#      EXECUTABLE    = "one_im_sh",
++#      ARGUMENTS     = "-c -t 15 -r 0 vcenter" ]
+ #-------------------------------------------------------------------------------
+ 
+ #-------------------------------------------------------------------------------
+@@ -521,19 +521,19 @@
+ #       defaults to 'suspend'.
+ #    -w Timeout in seconds to execute external commands (default unlimited)
+ #-------------------------------------------------------------------------------
+-VM_MAD = [
+-    NAME           = "vcenter",
+-    SUNSTONE_NAME  = "VMWare vCenter",
+-    EXECUTABLE     = "one_vmm_sh",
+-    ARGUMENTS      = "-p -t 15 -r 0 vcenter -s sh",
+-    DEFAULT        = "vmm_exec/vmm_exec_vcenter.conf",
+-    TYPE           = "xml",
+-    KEEP_SNAPSHOTS = "yes",
+-    IMPORTED_VMS_ACTIONS = "terminate, terminate-hard, hold, release, suspend,
+-        resume, delete, reboot, reboot-hard, resched, unresched, poweroff,
+-        poweroff-hard, disk-attach, disk-detach, nic-attach, nic-detach,
+-        snap-create, snap-delete"
+-]
++#VM_MAD = [
++#    NAME           = "vcenter",
++#    SUNSTONE_NAME  = "VMWare vCenter",
++#    EXECUTABLE     = "one_vmm_sh",
++#    ARGUMENTS      = "-p -t 15 -r 0 vcenter -s sh",
++#    DEFAULT        = "vmm_exec/vmm_exec_vcenter.conf",
++#    TYPE           = "xml",
++#    KEEP_SNAPSHOTS = "yes",
++#    IMPORTED_VMS_ACTIONS = "terminate, terminate-hard, hold, release, suspend,
++#        resume, delete, reboot, reboot-hard, resched, unresched, poweroff,
++#        poweroff-hard, disk-attach, disk-detach, nic-attach, nic-detach,
++#        snap-create, snap-delete"
++#]
+ #-------------------------------------------------------------------------------
+ 
+ #-------------------------------------------------------------------------------
+diff -Naur --color one-conf-distribution/oneflow-server.conf one-conf/oneflow-server.conf
+--- one-conf-distribution/oneflow-server.conf	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/oneflow-server.conf	2019-12-09 08:22:22.580082411 +0100
+@@ -38,10 +38,10 @@
+ ################################################################################
+ 
+ # Default cooldown period after a scale operation, in seconds
+-:default_cooldown: 300
++:default_cooldown: 200
+ 
+ # Default shutdown action. Values: 'terminate', 'terminate-hard'
+-:shutdown_action: 'terminate'
++:shutdown_action: 'terminate-hard'
+ 
+ # Default number of virtual machines (action_number) that will receive the
+ #   given call in each interval defined by action_period, when an action
+diff -Naur --color one-conf-distribution/onegate-server.conf one-conf/onegate-server.conf
+--- one-conf-distribution/onegate-server.conf	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/onegate-server.conf	2019-12-09 08:22:45.892466258 +0100
+@@ -37,7 +37,7 @@
+ # Log debug level
+ #   0 = ERROR, 1 = WARNING, 2 = INFO, 3 = DEBUG
+ #
+-:debug_level: 3
++:debug_level: 0
+ 
+ ################################################################################
+ # Auth
+diff -Naur --color one-conf-distribution/sched.conf one-conf/sched.conf
+--- one-conf-distribution/sched.conf	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/sched.conf	2019-12-09 08:23:15.592435274 +0100
+@@ -67,7 +67,7 @@
+ #*******************************************************************************
+ 
+ MESSAGE_SIZE = 1073741824
+-TIMEOUT      = 60 
++TIMEOUT      = 360
+ 
+ ONE_XMLRPC = "http://localhost:2633/RPC2"
+ 
+diff -Naur --color one-conf-distribution/sunstone-logos.yaml one-conf/sunstone-logos.yaml
+--- one-conf-distribution/sunstone-logos.yaml	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/sunstone-logos.yaml	2019-12-09 08:23:34.722161896 +0100
+@@ -5,7 +5,4 @@
+ - { 'name': "Debian",             'path': "images/logos/debian.png"}
+ - { 'name': "Fedora",             'path': "images/logos/fedora.png"}
+ - { 'name': "Linux",              'path': "images/logos/linux.png"}
+-- { 'name': "Redhat",             'path': "images/logos/redhat.png"}
+-- { 'name': "Ubuntu",             'path': "images/logos/ubuntu.png"}
+-- { 'name': "Windows XP/2003",    'path': "images/logos/windowsxp.png"}
+-- { 'name': "Windows 8",          'path': "images/logos/windows8.png"}
+\ Chybí znak konce řádku na konci souboru
++- { 'name': "Ubuntu",             'path': "images/logos/ubuntu.png"}
+\ Chybí znak konce řádku na konci souboru
+diff -Naur --color one-conf-distribution/sunstone-server.conf one-conf/sunstone-server.conf
+--- one-conf-distribution/sunstone-server.conf	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/sunstone-server.conf	2019-12-09 08:24:18.888780240 +0100
+@@ -28,7 +28,7 @@
+ 
+ # Server Configuration
+ #
+-:host: 0.0.0.0
++:host: 127.0.0.1
+ :port: 9869
+ 
+ # Place where to store sessions, this value can be memory, memcache or memcache-dalli
+@@ -62,7 +62,7 @@
+ # Log debug level
+ #   0 = ERROR, 1 = WARNING, 2 = INFO, 3 = DEBUG
+ #
+-:debug_level: 3
++:debug_level: 0
+ 
+ ################################################################################
+ # Proxy
