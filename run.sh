@@ -54,22 +54,22 @@ USAGE:
         Test output is saved into a log: 'test-dir/log/patch.log'.
 
 EXAMPLE:
-    % ${0} init ./tests/centos7-one-5.4
+    % ${0} init ./tests/centos7-one5.4
         This copies the OpenNebula's 5.4 configuration from the CentOS7
         container into: ./tests/centos7-one-5.4/one-conf
 
-    % ${0} diff ./tests/centos7-one-5.4 test1.patch
+    % ${0} diff ./tests/centos7-one5.4 test1.patch
         This creates a patch file which can be used in the next step.
 
         Here we expect that you made some changes in:
         ./tests/centos7-one-5.4/one-conf
 
-    % ${0} test ./tests/centos7-one-5.4 test1.patch
+    % ${0} test ./tests/centos7-one5.4 test1.patch
         Now we finally update OpenNebula and test onecfg upgrade. The output
         of test is shown in the stdout and also stored in:
         ./tests/centos7-one-5.4/log/test1.patch.log
 
-    % ${0} run ./tests/centos7-one-5.4 test1.patch
+    % ${0} run ./tests/centos7-one5.4 test1.patch
         By using this command we can do update and onecfg upgrade (or anything
         else) manually. The configuration was already patched and OpenNebula's
         repo file updated (but update of packages was not yet done).
