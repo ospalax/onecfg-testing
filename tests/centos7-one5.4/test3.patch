@@ -1,0 +1,12 @@
+diff -Naur --color one-conf-distribution/sunstone-logos.yaml one-conf/sunstone-logos.yaml
+--- one-conf-distribution/sunstone-logos.yaml	2018-06-06 22:27:02.000000000 +0200
++++ one-conf/sunstone-logos.yaml	2019-12-12 08:41:38.975689991 +0100
+@@ -5,7 +5,6 @@
+ - { 'name': "Debian",             'path': "images/logos/debian.png"}
+ - { 'name': "Fedora",             'path': "images/logos/fedora.png"}
+ - { 'name': "Linux",              'path': "images/logos/linux.png"}
+-- { 'name': "Redhat",             'path': "images/logos/redhat.png"}
+ - { 'name': "Ubuntu",             'path': "images/logos/ubuntu.png"}
+ - { 'name': "Windows XP/2003",    'path': "images/logos/windowsxp.png"}
+ - { 'name': "Windows 8",          'path': "images/logos/windows8.png"}
+\ Chybí znak konce řádku na konci souboru
