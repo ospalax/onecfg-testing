@@ -1,0 +1,12 @@
+diff -Naur --color one-conf-distribution/oned.conf one-conf/oned.conf
+--- one-conf-distribution/oned.conf	2019-09-24 15:59:49.000000000 +0200
++++ one-conf/oned.conf	2019-12-12 08:03:34.152919174 +0100
+@@ -85,7 +85,7 @@
+ 
+ PORT = 2633
+ 
+-LISTEN_ADDRESS = "0.0.0.0"
++LISTEN_ADDRESS = "127.0.0.1"
+ 
+ DB = [ BACKEND = "sqlite" ]
+ 
